@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        boolean isProgrammeEnded = false;
         MetierProduitImpl job = new MetierProduitImpl(
               new ArrayList<>(
                     List.of(
@@ -65,9 +66,13 @@ public class Main {
                     job.delete(id);
                     break;
                 case 5:
-                    //End th Terminate the loop and ee program
+                    //End the program
+                    isProgrammeEnded = true;
                     break;
             }
+
+            if (isProgrammeEnded)
+                break;
         }
 
     }
