@@ -1,4 +1,8 @@
-public class Produit {
+package model;
+
+import java.io.Serializable;
+
+public class Produit implements Serializable {
     private long id;
     private String nom;
     private String marque;

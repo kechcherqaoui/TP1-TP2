@@ -1,9 +1,13 @@
+import model.Produit;
+import service.MetierProduitImpl;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
         boolean isProgrammeEnded = false;
         MetierProduitImpl job = new MetierProduitImpl(
@@ -23,12 +27,15 @@ public class Main {
             System.out.println("2. Rechercher un produit par son id");
             System.out.println("3. Ajouter un nouveau produit dans la liste");
             System.out.println("4. Supprimer un produit par id");
-            System.out.println("5. Quitter ce programme");
+            System.out.println("5. Sauvegarder les produits");
+            System.out.println("6. Quitter ce programme");
 
             switch (sc.nextInt()) {
                 case 1:
                     System.out.println("------ all products -------");
-                    for (Produit produit : job.getAll())
+                    List<Produit> produits = job.getAll();
+                    if (produits != null)
+                    for (Produit produit : produits)
                         System.out.println(produit);
                     break;
                 case 2:
@@ -66,14 +73,16 @@ public class Main {
                     job.delete(id);
                     break;
                 case 5:
+                    job.saveAll();
+                    System.out.println("La liste des produits a été sauvegardée dans le fichier produits.dat.");
+                    break;
+                default:
                     //End the program
                     isProgrammeEnded = true;
-                    break;
             }
 
             if (isProgrammeEnded)
                 break;
         }
-
     }
 }
